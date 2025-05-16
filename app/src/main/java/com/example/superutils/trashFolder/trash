@@ -1,0 +1,551 @@
+
+
+//    Image(
+//        painter = rememberAsyncImagePainter("https://picsum.photos/$width/$height"),
+//        contentDescription = "Random Image",
+//        contentScale = ContentScale.Crop,
+//        modifier = Modifier
+//            .padding(horizontal = 8.dp)
+//            .height(150.dp)
+//            .clip(RoundedCornerShape(16.dp))
+//    )
+//
+//    val context = LocalContext.current
+//    AndroidView(
+//        factory = {
+//            ImageView(context).apply {
+//                layoutParams = ViewGroup.LayoutParams(width, height)
+//                scaleType = ImageView.ScaleType.CENTER_CROP
+//                Glide.with(context)
+//                    .load("https://picsum.photos/$width/$height")
+//                    .into(this)
+//            }
+//        },
+//        modifier = Modifier
+//            .padding(horizontal = 8.dp)
+//            .height(150.dp)
+//            .clip(RoundedCornerShape(16.dp))
+//    )
+
+
+//@Composable
+//fun ReceivedDataPage() {
+//    @Composable
+//    fun RandomTextCard() {
+//        val sampleText = remember {
+//            """Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium..."""
+//        }
+//
+//        Card(
+//            shape = RoundedCornerShape(16.dp),
+//            border = BorderStroke(2.dp, Color.White),
+////            elevation = 5.dp,
+//            modifier = Modifier
+//                .padding(8.dp)
+//                .fillMaxWidth()
+//        ) {
+//            Text(
+//                sampleText.take(100 + Random.nextInt(100)),
+//                overflow = TextOverflow.Ellipsis,
+//                softWrap = false,
+//                modifier = Modifier.padding(8.dp)
+//            )
+//        }
+//    }
+//
+//    @Composable
+//    fun RandomImageBox() {
+//        val width = remember { 100 + Random.nextInt(151) }
+//        val height = remember { 100 + Random.nextInt(151) }
+//
+//        Box(
+//            modifier = Modifier
+//                .padding(8.dp)
+//                .size(width.dp, height.dp)
+//                .clip(RoundedCornerShape(16.dp))
+//                .background(Color.DarkGray),
+//            contentAlignment = Alignment.Center
+//        ) {
+//            Text(
+//                text = "$width×$height",
+//                color = Color.White,
+//                fontSize = 14.sp
+//            )
+//        }
+//    }
+//
+//    val items = listOf<@Composable () -> Unit>(
+//        { RandomImageBox() },
+//        { RandomImageBox() },
+//        { RandomImageBox() },
+//        { RandomImageBox() },
+//        { RandomImageBox() },
+//        { RandomTextCard() },
+//        { RandomTextCard() },
+//        { RandomTextCard() },
+//        { RandomTextCard() },
+//        { RandomTextCard() },
+//        { RandomTextCard() },
+//    )
+//
+//
+//    val col1 = items.filterIndexed { index, _ -> index % 2 == 0 }
+//    val col2 = items.filterIndexed { index, _ -> index % 2 != 0 }
+//
+//    Box {
+//        // Scrollable body
+//        Column(
+//            modifier = Modifier
+//                .verticalScroll(rememberScrollState())
+//                .padding(top = 80.dp, start = 16.dp, end = 16.dp)
+//        ) {
+//            Row(horizontalArrangement = Arrangement.Start) {
+//                Column(modifier = Modifier.weight(1f)) {
+//                    col1.forEach { it() }
+//                }
+//                Column(modifier = Modifier.weight(1f)) {
+//                    col2.forEach { it() }
+//                }
+//            }
+//        }
+//
+//        // Sticky Header
+//        Box(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(60.dp)
+//                .background(Color.Transparent)
+//                .blur(8.dp),
+//            contentAlignment = Alignment.Center
+//        ) {
+//            Text(
+//                "Received From Laptop",
+//                fontSize = 24.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = Color.White
+//            )
+//        }
+//    }
+//}
+
+
+
+
+
+
+
+
+//private fun parseParcelBody(body: String, items: MutableList<ParcelItem>) {
+//        val lines = body.split("\n")
+//        var mimeType = ""
+//        var contentBuilder = StringBuilder()
+//        var inItem = false
+//
+//        for (line in lines) {
+//            when {
+//                line == "--ITEM_START--" -> {
+//                    mimeType = ""
+//                    contentBuilder = StringBuilder()
+//                    inItem = true
+//                }
+//                line.startsWith("MIMETYPE:") -> {
+//                    mimeType = line.removePrefix("MIMETYPE:").trim()
+//                }
+//                line == "CONTENT:" -> {
+//                    // next lines are content
+//                }
+//                line == "--ITEM_END--" -> {
+//                    items.add(ParcelItem(mimeType, contentBuilder.toString()))
+//                    inItem = false
+//                }
+//                inItem -> {
+//                    contentBuilder.appendLine(line)
+//                }
+//            }
+//        }
+//    }
+
+
+//            val parseResult: Result<SuperParcel> = SuperParcel.fromParcelString(composedString);
+//            if (parseResult.isSuccess){
+//                updateParcelStatus(StatusHolder.good("Received valid parcel (${composedString.length} chars)"))
+//                //do whatever
+//            } else {
+//                updateParcelStatus(StatusHolder.bad("Received shitty parcel: ${parseResult.error}"))
+//                //do whatever
+//            }
+
+
+
+//private fun computeSHA256(input: String): String {
+//    val digest = MessageDigest.getInstance("SHA-256")
+//    val hash = digest.digest(input.toByteArray(StandardCharsets.UTF_8))
+//    return hash.joinToString("") { "%02x".format(it) }.uppercase()
+//}
+
+
+//private fun convertDataToString(data: Any): String? {
+//    return when (data) {
+//        is String -> {
+//            val file = File(data)
+//            if (file.exists()) {
+//                // If it's a file path, read the file as bytes and encode to Base64
+//                Base64.encodeToString(file.readBytes(), Base64.NO_WRAP)
+//            } else {
+//                // Otherwise, treat it as a regular string
+//                data.toByteArray(Charsets.UTF_8).toString(Charsets.UTF_8)
+//            }
+//        }
+//
+//        is File -> {
+//            // If it's a File, read the file as bytes and encode to Base64
+//            if (data.exists()) {
+//                Base64.encodeToString(data.readBytes(), Base64.NO_WRAP)
+//            } else {
+//                throw Exception("File does not exist: ${data.absolutePath}")
+//            }
+//        }
+//
+//        is Bitmap -> {
+//            val stream = ByteArrayOutputStream()
+//            data.compress(Bitmap.CompressFormat.PNG, 100, stream)
+//            val byteArray = stream.toByteArray()
+//            Base64.encodeToString(byteArray, Base64.NO_WRAP)
+//        }
+//
+//        is ByteArray -> {
+//            Base64.encodeToString(data, Base64.NO_WRAP)
+//        }
+//
+//        else -> {
+//            throw Exception("Unrecognized data type: $data + ${data.javaClass.simpleName}")
+//        }
+//    }
+//}
+
+
+//
+//
+//
+//
+//
+//
+//
+//fun getFullEncodedParcel(): String {
+//    //------------------------------------------------------------------------------------
+//    //                             BODY
+//    //------------------------------------------------------------------------------------
+//    val bodyBuilder = StringBuilder()
+//    for (item in items) {
+//        bodyBuilder.appendLine("--ITEM_START--")
+//        bodyBuilder.appendLine("MIMETYPE:${item.mimeType}")
+//        bodyBuilder.appendLine("ENCODING:${item.getIntendedEncoding()}")
+//        bodyBuilder.appendLine("CONTENT:")
+//        bodyBuilder.appendLine(item.getBytes().toString())
+//        bodyBuilder.appendLine("--ITEM_END--")
+//    }
+//    bodyBuilder.appendLine("END_OF_TRANSMISSION")
+//
+//    val body = bodyBuilder.toString()
+//    val checksum = computeSHA256(body)
+//
+//    //------------------------------------------------------------------------------------
+//    //                             HEADER
+//    //------------------------------------------------------------------------------------
+//    val headerBuilder = StringBuilder()
+//    headerBuilder.appendLine("[SUPERUTILS_PARCEL]")
+//    headerBuilder.appendLine("VERSION:1")
+//    headerBuilder.appendLine("TOTAL_SIZE:${body.toByteArray().size}")
+//    headerBuilder.appendLine("NUM_ITEMS:${items.size}")
+//    headerBuilder.appendLine("CHECKSUM:$checksum")
+//    headerBuilder.appendLine("END_HEADER")
+//
+//    return headerBuilder.toString() + body
+//}
+
+
+
+//fun fromParcelString(parcel: String): Result<SuperParcel> {
+//    val lines = parcel.lines()
+//    val parsed = SuperParcel()
+//
+//    var readingHeader = true
+//    var checksumFromHeader: String? = null
+//    val bodyBuilder = StringBuilder()
+//
+//    var i = 0
+//    while (i < lines.size) {
+//        val line = lines[i]
+//
+//        if (readingHeader) {
+//            if (line.startsWith("CHECKSUM:")) {
+//                checksumFromHeader = line.substringAfter("CHECKSUM:")
+//            }
+//            if (line == "END_HEADER") {
+//                readingHeader = false
+//            }
+//        } else {
+//            bodyBuilder.appendLine(line)
+//        }
+//        i++
+//    }
+//
+//    if (checksumFromHeader == null) {
+//        return Result.Failure("Missing checksum in header.")
+//    }
+//
+//    val body = bodyBuilder.toString()
+//    val computedChecksum = computeSHA256(body)
+//
+//    if (computedChecksum != checksumFromHeader.uppercase()) {
+//        return Result.Failure("Checksum mismatch. Parcel may be corrupted.")
+//    }
+//
+//    // Parse items
+//    val itemBlocks = body.split("--ITEM_START--").drop(1)
+//    for (block in itemBlocks) {
+//        val linesBlock = block.lines()
+//        var mimeType: String? = null
+//        val contentBuilder = StringBuilder()
+//        var readingContent = false
+//
+//        for (line in linesBlock) {
+//            when {
+//                line.startsWith("MIMETYPE:") -> mimeType = line.substringAfter("MIMETYPE:")
+//                line == "CONTENT:" -> readingContent = true
+//                line == "--ITEM_END--" -> break
+//                readingContent -> contentBuilder.appendLine(line)
+//            }
+//        }
+//
+//        if (mimeType != null) {
+//            parsed.items.add(
+//                ParcelItem(
+//                    mimeType,
+//                    contentBuilder.toString().trim()
+//                )
+//            )
+//        } else {
+//            return Result.Failure("alformed item block detected (missing MIMETYPE).")
+//        }
+//    }
+//
+//    return Result.Success(parsed)
+//}
+
+
+
+//fun getIntendedEncoding(): String {
+//    return when (mimeType) {
+//        MimeHelper.getMimeType(MimeHelper.TXT) -> {
+//            "utf8"
+//        }
+//
+//        else -> {
+//            "base64"
+//        }
+//    }
+//}
+
+
+
+
+
+
+
+            //my impl
+            //my impl
+            //my impl
+
+
+//            var readingHeader = true
+//            var checksumFromHeader: String? = null
+//            val byteBuilder = ByteArrayOutputStream()
+//
+//            var i = 0
+//            var endOfTransmissionReached = false
+//
+//            while (i < parcelBytes.size) {
+//                val byte = parcelBytes[i]
+//
+//                if (readingHeader) {
+//                    // Handle reading the header.
+//                    if (byte == '\n'.code.toByte()) { // End of line (header).
+//                        // Check for checksum and "END_HEADER"
+//                        val headerLine = byteBuilder.toByteArray().toString(Charsets.UTF_8)
+//                        if (headerLine.startsWith("CHECKSUM:")) {
+//                            checksumFromHeader = headerLine.substringAfter("CHECKSUM:")
+//                        } else if (headerLine == "\nEND_HEADER") {
+//                            readingHeader = false
+//                        }
+//
+//                        // Reset the bodyBuilder for the next header/body line
+//                        byteBuilder.reset()
+//                    } else {
+//                        byteBuilder.write(byte.toInt()) // Collect header data
+//                    }
+//                } else {
+//                    // Handle reading the body.
+//                    if (byte == '\n'.code.toByte()) { // End of line (body).
+//                        val bodyLine = byteBuilder.toByteArray().toString(Charsets.UTF_8)
+//                        Log.d(TAG, "$bodyLine        ${bodyLine == "\nEND_OF_TRANSMISSION"}")
+//                        if (bodyLine == "\nEND_OF_TRANSMISSION") {
+//                            endOfTransmissionReached = true
+//                            break
+//                        }
+//
+//                        byteBuilder.reset()
+//                        byteBuilder.write(byte.toInt()) // Add line to the body builder
+//                    } else {
+//                        byteBuilder.write(byte.toInt())
+//                    }
+//                }
+//                i++
+//            }
+//
+//            // If checksum was not found in the header, return failure
+//            if (checksumFromHeader == null) {
+//                return Result.Failure("Missing checksum in header.")
+//            }
+//
+//            // If END_OF_TRANSMISSION was not found, return failure
+//            if (!endOfTransmissionReached) {
+//                return Result.Failure("Missing END_OF_TRANSMISSION marker.")
+//            }
+//
+//            // Get the body as raw byte array (content part)
+//            val body = byteBuilder.toByteArray()
+//
+//            // Compute checksum
+//            val computedChecksum = computeSHA256(body)
+//
+//            if (computedChecksum != checksumFromHeader.uppercase()) {
+//                return Result.Failure("Checksum mismatch. Parcel may be corrupted.")
+//            }
+//
+//            // Parse items from the body (this will need to read the body as raw bytes)
+//            val itemBlocks = body.toString(Charsets.UTF_8).split("--ITEM_START--").drop(1)
+//            for (block in itemBlocks) {
+//                val linesBlock = block.toString().lines()
+//                var mimeType: String? = null
+//                val contentBuilder = ByteArrayOutputStream()
+//                var readingContent = false
+//
+//                for (line in linesBlock) {
+//                    when {
+//                        line.startsWith("MIMETYPE:") -> mimeType = line.substringAfter("MIMETYPE:")
+//                        line == "CONTENT:" -> readingContent = true
+//                        line == "--ITEM_END--" -> break
+//                        readingContent -> contentBuilder.write(line.toByteArray())
+//                    }
+//                }
+//
+//                if (mimeType != null) {
+//                    parsed.items.add(
+//                        ParcelItem(
+//                            mimeType,
+//                            contentBuilder.toByteArray()
+//                        )
+//                    )
+//                } else {
+//                    return Result.Failure("Malformed item block detected (missing MIMETYPE).")
+//                }
+//            }
+//
+//            return Result.Success(parsed)
+
+
+
+
+
+
+//
+//private fun receiveParcelAsyncLoop() {
+//    var socketWasDead = true
+//
+//    try {
+//        var reader: BufferedReader? = null
+//        while (true) {
+//            if (getSocketState().isFailure) {
+//                if (!socketWasDead) {
+//                    socketWasDead = true
+//                }
+//                Thread.sleep(100) // Avoid busy loop
+//                continue
+//            }
+//            else if (socketWasDead) {
+//                socketWasDead = false;
+//                reader = BufferedReader(InputStreamReader(clientSocket!!.getInputStream()))
+//            }
+//
+//            try {
+//                val builder = StringBuilder()
+//                var line: String?
+//
+//                while (reader!!.readLine().also { line = it } != null) {
+//                    if (line == "END_OF_TRANSMISSION") break
+//                    builder.appendLine(line)
+//                }
+//
+//                val composedString = builder.toString()
+//                println("Received: $composedString")
+//
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                break // or handle reconnect here
+//            }
+//        }
+//    } catch (e: Exception) {
+//        e.printStackTrace()
+//    }
+//}
+
+
+
+
+//                        Log.d(TAG, "Read $bytesRead bytes")
+//                        Log.d(TAG, String(buffer, 0, bytesRead))
+
+
+//
+//
+//private fun ByteArray.indexOfSubArray(subArray: ByteArray): Int {
+//    outer@ for (i in 0..(this.size - subArray.size)) {
+//        for (j in subArray.indices) {
+//            if (this[i + j] != subArray[j]) continue@outer
+//        }
+//        return i
+//    }
+//    return -1
+//}
+
+//
+//                    val buffer = ByteArrayOutputStream()
+//                    val tempBuf = ByteArray(4096)
+//                    var bytesRead: Int = 0
+//
+//                    // Read until we detect "END_OF_TRANSMISSION"
+//                    var transmissionEnded = false
+//                    while (!transmissionEnded && input!!.read(tempBuf).also { bytesRead = it } != -1) {
+//                        buffer.write(tempBuf, 0, bytesRead)
+//
+//                        val content = buffer.toByteArray()
+//                        val marker = "END_OF_TRANSMISSION".toByteArray(Charsets.UTF_8)
+//                        if (content.indexOfSubArray(marker) != -1) {
+//                            transmissionEnded = true
+//                        }
+//                    }
+//
+//                    val parcelBytes = buffer.toByteArray()
+//
+//                    println("Received ${parcelBytes.size} bytes.")
+//
+//                    // You should now pass parcelBytes to your `fromParcelBytes()` parser
+//                    when (val result = SuperParcel.fromParcelBytes(parcelBytes)) {
+//                        is Result.Success -> {
+//                            println("Parsed parcel successfully: ${result.data}")
+//                        }
+//                        is Result.Failure -> {
+//                            println("Parcel parse failed: ${result.error}")
+//                        }
+//                    }
